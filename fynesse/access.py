@@ -126,3 +126,17 @@ def data() -> Union[pd.DataFrame, None]:
         logger.error(f"Unexpected error loading data: {e}")
         print(f"Error loading data: {e}")
         return None
+
+def load_datasets(raw_url: str) -> pd.DataFrame:
+    """
+    Load a CSV dataset directly from a GitHub raw URL.
+    """
+    print(f"Loading dataset from {raw_url} ...")
+
+    try:
+        df = pd.read_csv(raw_url)
+    except UnicodeDecodeError:
+        df = pd.read_csv(raw_url, encoding="ISO-8859-1")
+
+    print("Dataset loaded:", df.shape)
+    return df
