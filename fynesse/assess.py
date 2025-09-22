@@ -1,6 +1,8 @@
 from typing import Any, Union
 import pandas as pd
 import logging
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 from .config import *
 from . import access
@@ -125,3 +127,43 @@ def statistical_summary(df):
 
 def info_summary(df):
     print("\nDataset Info:\n", df.info())
+
+def value_counts(df, col):
+    print(f"\nValue counts for {col}:\n", df[col].value_counts())
+def col_names(df):
+    print("\nColumn names:\n", list(df.columns))
+    return list(df.columns)
+def convert_to_numeric(df):
+    numeric_cols = [
+        'so2', 'co', 'o3', 'o3_8hr', 'pm10', 'pm2.5',
+        'no2', 'nox', 'no', 'windspeed', 'winddirec',
+        'co_8hr', 'pm2.5_avg', 'pm10_avg', 'so2_avg'
+    ]
+    df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors='coerce')
+    return df
+
+def encode_status(df, col="status"):
+    status_mapping = {
+        "Good": 0,
+        "Moderate": 1,
+        "Unhealthy for Sensitive Groups": 2,
+        "Unhealthy": 3,
+        "Very Unhealthy": 4,
+        "Hazardous": 5
+    }
+    if df[col].dtype == "object":
+        df[col] = df[col].map(status_mapping)
+    
+    return df
+
+
+def correlation_matrix(df, figsize=(12, 8), cmap="coolwarm"):
+    corr = df.corr(numeric_only=True)
+    
+    # Plot heatmap
+    plt.figure(figsize=figsize)
+    sns.heatmap(corr, annot=True, fmt=".2f", cmap=cmap, cbar=True, square=True)
+    plt.title("Correlation Matrix", fontsize=16)
+    plt.show()
+    
+    return corr
