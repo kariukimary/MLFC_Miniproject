@@ -186,6 +186,15 @@ def encode(df, col="status"):
     }
     df[col] = df[col].map(mapping)
     return df
+
+def plot(df, column):
+        plt.figure(figsize=(10,6))
+        sns.countplot(data=df, x=column, order=df[column].value_counts().index, palette="viridis")
+        plt.title(f"Distribution of {column}")
+        plt.xlabel(column)
+        plt.ylabel("Count")
+        plt.xticks(rotation=45)
+        plt.show()
 def correlation_matrix(df, figsize=(12, 8), cmap="coolwarm"):
     corr = df.corr(numeric_only=True)
     
