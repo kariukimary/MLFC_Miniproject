@@ -11,6 +11,11 @@ This module handles question addressing functionality including:
 from typing import Any, Union
 import pandas as pd
 import logging
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score,confusion_matrix
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -104,3 +109,14 @@ def analyze_data(data: Union[pd.DataFrame, Any]) -> dict[str, Any]:
         logger.error(f"Error during data analysis: {e}")
         print(f"Error analyzing data: {e}")
         return {"error": str(e)}
+def scale_features(X_train, X_test):
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    return X_train_scaled, X_test_scaled, scaler
+
+
+def fit_logistic(x_train, y_train):
+    model = LogisticRegression()  # allow more iterations for convergence
+    model.fit(X_train_scaled, y_train)
+    return model
