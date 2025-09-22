@@ -111,3 +111,17 @@ def view(data: Union[pd.DataFrame, Any]) -> None:
 def labelled(data: Union[pd.DataFrame, Any]) -> Union[pd.DataFrame, Any]:
     """Provide a labelled set of data ready for supervised learning."""
     raise NotImplementedError
+
+def null_values(df):
+    print("Missing values per column:\n", df.isna().sum())
+    print("\nPercentage missing:\n", (df.isna().mean() * 100).round(2))
+
+def check_duplicates(df):
+    duplicates = df.duplicated().sum()
+    print(f"Total duplicate rows: {duplicates}")
+
+def statistical_summary(df):
+    print("\nStatistical Summary:\n", df.describe())
+
+def info_summary(df):
+    print("\nDataset Info:\n", df.info())
