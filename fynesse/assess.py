@@ -156,7 +156,31 @@ def encode_status(df, col="status"):
     
     return df
 
+def drop_unnecessary_columns(df, cols=None):
+    if cols is None:
+        cols = [
+            'latitude', 'longitude', 'siteid', 'pollutant',
+            'sitename', 'county', 'date', 'unit'
+        ]
+    df = df.drop(columns=cols, errors='ignore')
+    return df
+    if inplace:
+        df.dropna(inplace=True)
+        return None
+    else:
+        return df.dropna()
 
+def encode(df, col="status"):
+    mapping = {
+        "Good": 0,
+        "Moderate": 1,
+        "Unhealthy for Sensitive Groups": 2,
+        "Unhealthy": 3,
+        "Very Unhealthy": 4,
+        "Hazardous": 5
+    }
+    df[col] = df[col].map(mapping)
+    return df
 def correlation_matrix(df, figsize=(12, 8), cmap="coolwarm"):
     corr = df.corr(numeric_only=True)
     
