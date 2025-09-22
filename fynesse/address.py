@@ -14,8 +14,8 @@ import logging
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score,confusion_matrix
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -116,7 +116,7 @@ def scale_features(X_train, X_test):
     return X_train, X_test, scaler
 
 
-def fit_logistic(x_train, y_train):
-    model = LogisticRegression()  # allow more iterations for convergence
+def fit_regressor(x_train, y_train):
+    model = RandomForestRegressor()  
     model.fit(x_train, y_train)
     return model
