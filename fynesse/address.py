@@ -118,5 +118,5 @@ def scale_features(X_train, X_test):
 
 def fit_logistic(x_train, y_train):
     model = LogisticRegression()  # allow more iterations for convergence
-    model.fit(X_train, y_train)
+    model.fit(x_train, y_train)
     return model
