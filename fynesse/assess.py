@@ -169,7 +169,12 @@ def drop_unnecessary_columns(df, cols=None):
         return None
     else:
         return df.dropna()
-
+def drop_nulls(df, inplace=False):
+    if inplace:
+        df.dropna(inplace=True)
+        return None
+    else:
+        return df.dropna()
 def encode(df, col="status"):
     mapping = {
         "Good": 0,
