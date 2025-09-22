@@ -111,9 +111,9 @@ def analyze_data(data: Union[pd.DataFrame, Any]) -> dict[str, Any]:
         return {"error": str(e)}
 def scale_features(X_train, X_test):
     scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
-    return X_train_scaled, X_test_scaled, scaler
+    X_train = scaler.fit_transform(X_train)
+    X_test= scaler.transform(X_test)
+    return X_train, X_test, scaler
 
 
 def fit_logistic(x_train, y_train):
