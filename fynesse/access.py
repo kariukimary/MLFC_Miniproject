@@ -133,9 +133,7 @@ def data() -> Union[pd.DataFrame, None]:
         return None
 
 def load_datasets(raw_url: str) -> pd.DataFrame:
-    """
-    Load a CSV dataset directly from a GitHub raw URL.
-    """
+   
     print(f"Loading dataset from {raw_url} ...")
 
     try:
