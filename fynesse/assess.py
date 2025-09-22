@@ -190,7 +190,7 @@ def encode(df, col="status"):
 def plot(df, column):
         plt.figure(figsize=(10,6))
         sns.countplot(data=df, x=column, order=df[column].value_counts().index, palette="viridis")
-        plt.title(f"Distribution of {column}")
+        plt.title(f"Distribution of air quality status")
         plt.xlabel(column)
         plt.ylabel("Count")
         plt.xticks(rotation=45)
